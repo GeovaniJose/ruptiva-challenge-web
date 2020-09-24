@@ -1,6 +1,8 @@
 import React from 'react'
 import { FiArrowLeft } from 'react-icons/fi'
 
+import Button from '../../components/Button'
+
 import { Container, Content, AnimationContainer, Background } from './styles'
 
 const SignUp: React.FC = () => {
@@ -26,7 +28,7 @@ const SignUp: React.FC = () => {
             />
             <input name='email' placeholder='E-mail' />
             <input name='password' type='password' placeholder='Senha' />
-            <button type='submit'>Cadastrar</button>
+            <Button type='submit'>Cadastrar</Button>
           </form>
 
           <a href='/'>
