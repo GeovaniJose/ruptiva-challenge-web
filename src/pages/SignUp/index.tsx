@@ -1,6 +1,8 @@
 import React from 'react'
 import { FiArrowLeft } from 'react-icons/fi'
 
+import logoImg from '../../assets/logo.png'
+
 import Button from '../../components/Button'
 
 import { Container, Content, AnimationContainer, Background } from './styles'
@@ -12,8 +14,7 @@ const SignUp: React.FC = () => {
 
       <Content>
         <AnimationContainer>
-          {/* <img src={logoImg} alt='GoBarber' /> */}
-          <h1>Cockta.io</h1>
+          <img src={logoImg} alt='Cockta.io' />
 
           <form onSubmit={() => {}}>
             <h1>Faça seu cadastro</h1>

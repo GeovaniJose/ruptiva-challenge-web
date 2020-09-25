@@ -1,6 +1,8 @@
 import React from 'react'
 import { FiLogIn } from 'react-icons/fi'
 
+import logoImg from '../../assets/logo.png'
+
 import Button from '../../components/Button'
 
 import { Container, Content, AnimationContainer, Background } from './styles'
@@ -10,8 +12,7 @@ const SignIn: React.FC = () => {
     <Container>
       <Content>
         <AnimationContainer>
-          {/* <img alt='Cockta.io' /> */}
-          <h1>Cockta.io</h1>
+          <img src={logoImg} alt='Cockta.io' />
 
           <form onSubmit={() => {}}>
             <h1>Faça seu login</h1>
