@@ -1,9 +1,10 @@
 import React from 'react'
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft, FiMail, FiCalendar, FiLock, FiUser } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 
 import logoImg from '../../assets/logo.png'
 
+import Input from '../../components/Input'
 import Button from '../../components/Button'
 
 import { Container, Content, AnimationContainer, Background } from './styles'
@@ -20,16 +21,22 @@ const SignUp: React.FC = () => {
           <form onSubmit={() => {}}>
             <h1>Faça seu cadastro</h1>
 
-            <input name='name' placeholder='Nome' />
-            <input
+            <Input name='name' icon={FiUser} placeholder='Nome' />
+            <Input
               name='age'
               type='number'
               min='18'
               max='130'
+              icon={FiCalendar}
               placeholder='Idade'
             />
-            <input name='email' placeholder='E-mail' />
-            <input name='password' type='password' placeholder='Senha' />
+            <Input name='email' icon={FiMail} placeholder='E-mail' />
+            <Input
+              name='password'
+              icon={FiLock}
+              type='password'
+              placeholder='Senha'
+            />
             <Button type='submit'>Cadastrar</Button>
           </form>
 

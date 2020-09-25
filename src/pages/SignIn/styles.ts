@@ -46,24 +46,6 @@ export const AnimationContainer = styled.div`
       margin-bottom: 34px;
     }
 
-    input {
-      width: 100%;
-      background: #00649f;
-      border-radius: 10px;
-      padding: 16px;
-
-      border: 2px solid #00649f;
-      color: #f4ede8;
-
-      &::placeholder {
-        color: #999999;
-      }
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
     a {
       color: #f4ede8;
       display: block;
