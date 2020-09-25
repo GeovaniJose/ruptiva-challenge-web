@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiArrowLeft, FiMail, FiCalendar, FiLock, FiUser } from 'react-icons/fi'
+import { Form } from '@unform/web'
 import { Link } from 'react-router-dom'
 
 import logoImg from '../../assets/logo.png'
@@ -10,6 +11,10 @@ import Button from '../../components/Button'
 import { Container, Content, AnimationContainer, Background } from './styles'
 
 const SignUp: React.FC = () => {
+  function handleSubmit(data: object): void {
+    console.log(data)
+  }
+
   return (
     <Container>
       <Background />
@@ -18,7 +23,7 @@ const SignUp: React.FC = () => {
         <AnimationContainer>
           <img src={logoImg} alt='Cockta.io' />
 
-          <form onSubmit={() => {}}>
+          <Form onSubmit={handleSubmit}>
             <h1>Faça seu cadastro</h1>
 
             <Input name='name' icon={FiUser} placeholder='Nome' />
@@ -38,7 +43,7 @@ const SignUp: React.FC = () => {
               placeholder='Senha'
             />
             <Button type='submit'>Cadastrar</Button>
-          </form>
+          </Form>
 
           <Link to='/'>
             <FiArrowLeft />

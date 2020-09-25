@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi'
+import { Form } from '@unform/web'
 import { Link } from 'react-router-dom'
 
 import logoImg from '../../assets/logo.png'
@@ -16,7 +17,7 @@ const SignIn: React.FC = () => {
         <AnimationContainer>
           <img src={logoImg} alt='Cockta.io' />
 
-          <form onSubmit={() => {}}>
+          <Form onSubmit={() => {}}>
             <h1>Faça seu login</h1>
 
             <Input name='email' icon={FiMail} placeholder='E-mail' />
@@ -29,7 +30,7 @@ const SignIn: React.FC = () => {
             <Button type='submit'>Entrar</Button>
 
             <a href='forgot'>Esqueci minha senha</a>
-          </form>
+          </Form>
 
           <Link to='/signup'>
             <FiLogIn />
