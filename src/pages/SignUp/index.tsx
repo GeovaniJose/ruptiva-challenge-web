@@ -1,8 +1,11 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { FiArrowLeft, FiMail, FiCalendar, FiLock, FiUser } from 'react-icons/fi'
+import { FormHandles } from '@unform/core'
 import { Form } from '@unform/web'
 import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
+
+import getValidationErrors from '../../utils/getValidationErrors'
 
 import logoImg from '../../assets/logo.png'
 
@@ -12,8 +15,12 @@ import Button from '../../components/Button'
 import { Container, Content, AnimationContainer, Background } from './styles'
 
 const SignUp: React.FC = () => {
+  const formRef = useRef<FormHandles>(null)
+
   const handleSubmit = useCallback(async (data: object) => {
     try {
+      formRef.current?.setErrors({})
+
       const schema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatório'),
         age: Yup.number()
@@ -29,7 +36,9 @@ const SignUp: React.FC = () => {
         abortEarly: false
       })
     } catch (err) {
-      console.log(err)
+      const errors = getValidationErrors(err)
+
+      formRef.current?.setErrors(errors)
     }
   }, [])
 
@@ -41,7 +50,7 @@ const SignUp: React.FC = () => {
         <AnimationContainer>
           <img src={logoImg} alt='Cockta.io' />
 
-          <Form onSubmit={handleSubmit}>
+          <Form ref={formRef} onSubmit={handleSubmit}>
             <h1>Faça seu cadastro</h1>
 
             <Input name='name' icon={FiUser} placeholder='Nome' />
