@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiArrowLeft } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 import logoImg from '../../assets/logo.png'
 
@@ -32,10 +33,10 @@ const SignUp: React.FC = () => {
             <Button type='submit'>Cadastrar</Button>
           </form>
 
-          <a href='/'>
+          <Link to='/'>
             <FiArrowLeft />
             Voltar para login
-          </a>
+          </Link>
         </AnimationContainer>
       </Content>
     </Container>
