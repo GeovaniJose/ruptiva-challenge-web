@@ -1,7 +1,6 @@
 import React from 'react'
 
 import logoImg from '../../assets/logo.png'
-import profileImg from '../../assets/profile.jpg'
 import cocktailBlankImg from '../../assets/cocktail-blank.jpg'
 import profileBlankImg from '../../assets/profile-blank.png'
 
@@ -58,7 +57,7 @@ const Dashboard: React.FC = () => {
 
       <Menu>
         <div>
-          <img src={profileBlankImg || profileImg} alt='Geovani' />
+          <img src={profileBlankImg} alt='Geovani' />
 
           <div>
             <p>Bem vindo,</p>
