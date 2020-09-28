@@ -11,6 +11,7 @@ import Button from '../../components/Button'
 import { Container, Content, Menu, HeaderContent, DrinkImage } from './styles'
 
 const Dashboard: React.FC = () => {
+  const { signOut } = useAuth()
   const { user } = useAuth()
 
   useEffect(() => {
@@ -78,7 +79,9 @@ const Dashboard: React.FC = () => {
           <Button type='button'>Atualizar Perfil</Button>
         </aside>
 
-        <button type='button'>Logout</button>
+        <button type='button' onClick={() => signOut()}>
+          Logout
+        </button>
       </Menu>
     </Container>
   )
