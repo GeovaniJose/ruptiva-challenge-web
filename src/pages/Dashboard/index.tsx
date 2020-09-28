@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import { useAuth } from '../../hooks/auth'
 
 import logoImg from '../../assets/logo.png'
 import cocktailBlankImg from '../../assets/cocktail-blank.jpg'
-import profileBlankImg from '../../assets/profile-blank.png'
+import avatarBlankImg from '../../assets/avatar-blank.png'
 
 import Button from '../../components/Button'
 
 import { Container, Content, Menu, HeaderContent, DrinkImage } from './styles'
 
 const Dashboard: React.FC = () => {
+  const { user } = useAuth()
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
+
   return (
     <Container>
       <Content>
@@ -57,11 +65,11 @@ const Dashboard: React.FC = () => {
 
       <Menu>
         <div>
-          <img src={profileBlankImg} alt='Geovani' />
+          <img src={user.avatar || avatarBlankImg} alt={user.name} />
 
           <div>
             <p>Bem vindo,</p>
-            <span>Geovani José</span>
+            <span>{user.name}</span>
           </div>
         </div>
 
