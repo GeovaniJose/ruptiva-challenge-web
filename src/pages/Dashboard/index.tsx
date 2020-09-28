@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { useAuth } from '../../hooks/auth'
+import setUrlImg from '../../utils/setUrlImg'
 
 import api from '../../services/api'
 
@@ -57,7 +58,9 @@ const Dashboard: React.FC = () => {
         <ul>
           {cocktails.map((cocktail) => (
             <a key={cocktail.id}>
-              <DrinkImage urlImg={cocktail.image || cocktailBlankImg} />
+              <DrinkImage
+                urlImg={setUrlImg(cocktail.image, cocktailBlankImg)}
+              />
 
               <strong>{cocktail.name}</strong>
 
@@ -69,7 +72,7 @@ const Dashboard: React.FC = () => {
 
       <Menu>
         <div>
-          <img src={user.avatar || avatarBlankImg} alt={user.name} />
+          <img src={setUrlImg(user.avatar, avatarBlankImg)} alt={user.name} />
 
           <div>
             <p>Bem vindo,</p>
