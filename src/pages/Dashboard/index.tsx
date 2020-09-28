@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { useAuth } from '../../hooks/auth'
+import { useCocktail } from '../../hooks/cocktail'
 import setUrlImg from '../../utils/setUrlImg'
-
-import api from '../../services/api'
 
 import logoImg from '../../assets/logo.png'
 import cocktailBlankImg from '../../assets/cocktail-blank.jpg'
@@ -13,32 +12,13 @@ import Button from '../../components/Button'
 
 import { Container, Content, Menu, HeaderContent, DrinkImage } from './styles'
 
-interface CocktailProps {
-  id: string
-  name: string
-  alcohol_level: number
-  image: string
-}
-
 const Dashboard: React.FC = () => {
-  const [cocktails, setCocktails] = useState<CocktailProps[]>([])
-
-  const { signOut } = useAuth()
-  const { token, user } = useAuth()
+  const { signOut, user } = useAuth()
+  const { loadCocktails, cocktails } = useCocktail()
 
   useEffect(() => {
-    const loadCocktails = async () => {
-      const response = await api.get('cocktails', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-      setCocktails(response.data)
-    }
-
     loadCocktails()
-  }, [token, user])
+  }, [loadCocktails])
 
   return (
     <Container>
