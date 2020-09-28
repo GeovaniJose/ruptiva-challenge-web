@@ -13,6 +13,7 @@ interface CocktailState {
 interface CocktailContextData {
   cocktails: CocktailState[]
   loadCocktails(): Promise<void>
+  removeCocktail(id: string): void
 }
 
 const CocktailContext = createContext<CocktailContextData>(
@@ -34,8 +35,23 @@ export const CocktailProvider: React.FC = ({ children }) => {
     setCocktails(response.data)
   }, [token])
 
+  const removeCocktail = useCallback(
+    async (id) => {
+      await api.delete(`cocktails/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      setCocktails((state) => state.filter((cocktail) => cocktail.id !== id))
+    },
+    [token]
+  )
+
   return (
-    <CocktailContext.Provider value={{ cocktails, loadCocktails }}>
+    <CocktailContext.Provider
+      value={{ cocktails, loadCocktails, removeCocktail }}
+    >
       {children}
     </CocktailContext.Provider>
   )
