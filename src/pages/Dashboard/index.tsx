@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useAuth } from '../../hooks/auth'
+
+import api from '../../services/api'
 
 import logoImg from '../../assets/logo.png'
 import cocktailBlankImg from '../../assets/cocktail-blank.jpg'
@@ -10,13 +12,32 @@ import Button from '../../components/Button'
 
 import { Container, Content, Menu, HeaderContent, DrinkImage } from './styles'
 
+interface CocktailProps {
+  id: string
+  name: string
+  alcohol_level: number
+  image: string
+}
+
 const Dashboard: React.FC = () => {
+  const [cocktails, setCocktails] = useState<CocktailProps[]>([])
+
   const { signOut } = useAuth()
-  const { user } = useAuth()
+  const { token, user } = useAuth()
 
   useEffect(() => {
-    console.log(user)
-  }, [user])
+    const loadCocktails = async () => {
+      const response = await api.get('cocktails', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      setCocktails(response.data)
+    }
+
+    loadCocktails()
+  }, [token, user])
 
   return (
     <Container>
@@ -25,42 +46,24 @@ const Dashboard: React.FC = () => {
           <img src={logoImg} alt='Cockta.io' />
 
           <span>
-            Você tem <strong>17 Coquetéis</strong>
+            Você tem&nbsp;
+            <strong>
+              {cocktails.length}
+              {cocktails.length === 1 ? ' Coquetel' : ' Coquetéis'}
+            </strong>
           </span>
         </HeaderContent>
 
         <ul>
-          <a>
-            <DrinkImage urlImg={cocktailBlankImg} />
+          {cocktails.map((cocktail) => (
+            <a key={cocktail.id}>
+              <DrinkImage urlImg={cocktail.image || cocktailBlankImg} />
 
-            <strong>Whiskey Sour</strong>
+              <strong>{cocktail.name}</strong>
 
-            <p>Teor alcólico: 1</p>
-          </a>
-
-          <a>
-            <DrinkImage urlImg={cocktailBlankImg} />
-
-            <strong>Whiskey Sour</strong>
-
-            <p>Teor alcólico: 1</p>
-          </a>
-
-          <a>
-            <DrinkImage urlImg={cocktailBlankImg} />
-
-            <strong>Whiskey Sour</strong>
-
-            <p>Teor alcólico: 1</p>
-          </a>
-
-          <a>
-            <DrinkImage urlImg={cocktailBlankImg} />
-
-            <strong>Whiskey Sour</strong>
-
-            <p>Teor alcólico: 1</p>
-          </a>
+              <p>Teor alcólico: {cocktail.alcohol_level}</p>
+            </a>
+          ))}
         </ul>
       </Content>
 

@@ -72,6 +72,7 @@ export const HeaderContent = styled.header`
   background: #f4ede8;
   height: 70px;
   padding: 0 70px;
+  z-index: 1;
 
   display: flex;
   align-items: center;
