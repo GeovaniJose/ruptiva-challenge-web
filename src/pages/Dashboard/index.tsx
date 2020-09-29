@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FiX } from 'react-icons/fi'
+import { FiX, FiTrash2 } from 'react-icons/fi'
 
 import { useAuth } from '../../hooks/auth'
 import { useCocktail } from '../../hooks/cocktail'
@@ -23,8 +23,8 @@ import {
 const Dashboard: React.FC = () => {
   const [isShow, setIsShow] = useState(false)
 
-  const { signOut, user } = useAuth()
-  const { loadCocktails, cocktails } = useCocktail()
+  const { user, signOut } = useAuth()
+  const { cocktails, loadCocktails, removeCocktail } = useCocktail()
 
   useEffect(() => {
     loadCocktails()
@@ -54,7 +54,16 @@ const Dashboard: React.FC = () => {
 
               <strong>{cocktail.name}</strong>
 
-              <p>Teor alcoólico: {cocktail.alcohol_level}</p>
+              <p>
+                Teor alcoólico: {cocktail.alcohol_level}
+                <FiTrash2
+                  size={20}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    removeCocktail(cocktail.id)
+                  }}
+                />
+              </p>
             </a>
           ))}
         </ul>

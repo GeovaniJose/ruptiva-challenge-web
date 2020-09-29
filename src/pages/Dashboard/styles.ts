@@ -10,7 +10,6 @@ interface DrinkImageProps {
 }
 
 export const DrinkImage = styled.img<DrinkImageProps>`
-  /* flex: 1; */
   width: 100%;
   height: 100%;
   background: url(${(props) => props.urlImg}) no-repeat center;
@@ -57,7 +56,12 @@ export const Content = styled.main`
         box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.1);
       }
 
+      &:hover p > svg {
+        visibility: visible;
+      }
+
       strong {
+        max-width: 230px;
         margin-top: 12px;
         font-size: 20px;
         color: #515151;
@@ -66,6 +70,19 @@ export const Content = styled.main`
       p {
         margin-top: 4px;
         color: #999;
+        position: relative;
+
+        > svg {
+          position: absolute;
+          bottom: 2px;
+          right: 0;
+          color: #ccc;
+          visibility: hidden;
+
+          &:hover {
+            color: #c53730;
+          }
+        }
       }
     }
   }
@@ -156,6 +173,7 @@ export const Modal = styled.div<ModalProps>`
   bottom: 0;
   left: 0;
   z-index: 10;
+  position: fixed;
 
   padding: 40px 70px;
   display: ${(props) => (props.isShow ? 'flex' : 'none')};
@@ -176,7 +194,7 @@ export const Modal = styled.div<ModalProps>`
     justify-content: center;
     position: relative;
 
-    svg {
+    > svg {
       position: absolute;
       top: 2px;
       right: 2px;
