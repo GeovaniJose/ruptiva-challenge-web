@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { FiX } from 'react-icons/fi'
 
 import { useAuth } from '../../hooks/auth'
 import { useCocktail } from '../../hooks/cocktail'
@@ -10,9 +11,18 @@ import avatarBlankImg from '../../assets/avatar-blank.png'
 
 import Button from '../../components/Button'
 
-import { Container, Content, Menu, HeaderContent, DrinkImage } from './styles'
+import {
+  Container,
+  Content,
+  Menu,
+  HeaderContent,
+  DrinkImage,
+  Modal
+} from './styles'
 
 const Dashboard: React.FC = () => {
+  const [isShow, setIsShow] = useState(false)
+
   const { signOut, user } = useAuth()
   const { loadCocktails, cocktails } = useCocktail()
 
@@ -37,14 +47,14 @@ const Dashboard: React.FC = () => {
 
         <ul>
           {cocktails.map((cocktail) => (
-            <a key={cocktail.id}>
+            <a key={cocktail.id} onClick={() => setIsShow(true)}>
               <DrinkImage
                 urlImg={setUrlImg(cocktail.image, cocktailBlankImg)}
               />
 
               <strong>{cocktail.name}</strong>
 
-              <p>Teor alcólico: {cocktail.alcohol_level}</p>
+              <p>Teor alcoólico: {cocktail.alcohol_level}</p>
             </a>
           ))}
         </ul>
@@ -69,6 +79,28 @@ const Dashboard: React.FC = () => {
           Logout
         </button>
       </Menu>
+
+      <Modal isShow={isShow}>
+        <section>
+          <FiX size={20} onClick={() => setIsShow(false)} />
+          <DrinkImage urlImg={cocktailBlankImg} />
+
+          <div>
+            <strong>Gim Tônica</strong>
+
+            <p>
+              Teor alcoólico: <span>3</span>
+            </p>
+
+            <ul>
+              Ingredientes:
+              <li>1 corote limão</li>
+              <li>suco mid</li>
+              <li>gelo de água de coco</li>
+            </ul>
+          </div>
+        </section>
+      </Modal>
     </Container>
   )
 }
