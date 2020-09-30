@@ -8,6 +8,7 @@ interface CocktailState {
   name: string
   alcohol_level: number
   image: string
+  ingredients: string[]
 }
 
 interface CocktailContextData {

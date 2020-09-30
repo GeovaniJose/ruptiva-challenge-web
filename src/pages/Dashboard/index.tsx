@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { FiX, FiTrash2 } from 'react-icons/fi'
+import React, { useEffect } from 'react'
+import { FiTrash2 } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 
 import { useAuth } from '../../hooks/auth'
 import { useCocktail } from '../../hooks/cocktail'
@@ -17,12 +18,10 @@ import {
   Menu,
   HeaderContent,
   DrinkImage,
-  Modal
+  Card
 } from './styles'
 
 const Dashboard: React.FC = () => {
-  const [isShow, setIsShow] = useState(false)
-
   const { user, signOut } = useAuth()
   const { cocktails, loadCocktails, removeCocktail } = useCocktail()
 
@@ -46,25 +45,25 @@ const Dashboard: React.FC = () => {
         </HeaderContent>
 
         <ul>
-          {cocktails.map((cocktail) => (
-            <a key={cocktail.id} onClick={() => setIsShow(true)}>
-              <DrinkImage
-                urlImg={setUrlImg(cocktail.image, cocktailBlankImg)}
-              />
-
-              <strong>{cocktail.name}</strong>
-
-              <p>
-                Teor alcoólico: {cocktail.alcohol_level}
-                <FiTrash2
-                  size={20}
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    removeCocktail(cocktail.id)
-                  }}
+          {cocktails.map((cocktail, index) => (
+            <Card key={cocktail.id}>
+              <Link to={`/dashboard/cocktail?index=${index}`}>
+                <DrinkImage
+                  urlImg={setUrlImg(cocktail.image, cocktailBlankImg)}
                 />
-              </p>
-            </a>
+
+                <strong>{cocktail.name}</strong>
+
+                <p>Teor alcoólico: {cocktail.alcohol_level}</p>
+              </Link>
+              <FiTrash2
+                size={20}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  removeCocktail(cocktail.id)
+                }}
+              />
+            </Card>
           ))}
         </ul>
       </Content>
@@ -88,28 +87,6 @@ const Dashboard: React.FC = () => {
           Logout
         </button>
       </Menu>
-
-      <Modal isShow={isShow}>
-        <section>
-          <FiX size={20} onClick={() => setIsShow(false)} />
-          <DrinkImage urlImg={cocktailBlankImg} />
-
-          <div>
-            <strong>Gim Tônica</strong>
-
-            <p>
-              Teor alcoólico: <span>3</span>
-            </p>
-
-            <ul>
-              Ingredientes:
-              <li>1 corote limão</li>
-              <li>suco mid</li>
-              <li>gelo de água de coco</li>
-            </ul>
-          </div>
-        </section>
-      </Modal>
     </Container>
   )
 }

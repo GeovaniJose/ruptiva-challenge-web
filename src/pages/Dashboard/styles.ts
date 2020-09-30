@@ -1,10 +1,6 @@
 import styled from 'styled-components'
 import { shade } from 'polished'
 
-interface ModalProps {
-  isShow: boolean
-}
-
 interface DrinkImageProps {
   urlImg: string
 }
@@ -39,52 +35,57 @@ export const Content = styled.main`
     column-gap: 30px;
     row-gap: 50px;
     padding: 30px 70px 70px;
+    list-style: none;
+  }
+`
 
-    a {
-      min-width: 230px;
-      height: 350px;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform 0.2s;
+export const Card = styled.li`
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
 
-      &:hover {
-        transform: scale(1.1);
-      }
+  &:hover {
+    transform: scale(1.1);
+  }
 
-      &:hover img {
-        box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.1);
-      }
+  &:hover img {
+    box-shadow: 8px 8px 4px rgba(0, 0, 0, 0.1);
+  }
 
-      &:hover p > svg {
-        visibility: visible;
-      }
+  a {
+    min-width: 230px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
 
-      strong {
-        max-width: 230px;
-        margin-top: 12px;
-        font-size: 20px;
-        color: #515151;
-      }
-
-      p {
-        margin-top: 4px;
-        color: #999;
-        position: relative;
-
-        > svg {
-          position: absolute;
-          bottom: 2px;
-          right: 0;
-          color: #ccc;
-          visibility: hidden;
-
-          &:hover {
-            color: #c53730;
-          }
-        }
-      }
+    strong {
+      max-width: 230px;
+      margin-top: 12px;
+      font-size: 20px;
+      color: #515151;
     }
+
+    p {
+      margin-top: 4px;
+      color: #999;
+    }
+  }
+
+  svg {
+    position: absolute;
+    bottom: 2px;
+    right: 0;
+    color: #ccc;
+    visibility: hidden;
+
+    &:hover {
+      color: #c53730;
+    }
+  }
+
+  &:hover svg {
+    visibility: visible;
   }
 `
 
@@ -162,86 +163,6 @@ export const Menu = styled.section`
     &:hover {
       background: ${shade(0.2, '#c53030')};
       color: ${shade(0.2, '#fff')};
-    }
-  }
-`
-
-export const Modal = styled.div<ModalProps>`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 10;
-  position: fixed;
-
-  padding: 40px 70px;
-  display: ${(props) => (props.isShow ? 'flex' : 'none')};
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-
-  section {
-    width: 500px;
-    max-height: 100%;
-    padding: 20px;
-    border-radius: 4px;
-    color: #515151;
-    background: #f4ede8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-
-    > svg {
-      position: absolute;
-      top: 2px;
-      right: 2px;
-      color: #ffa520;
-      cursor: pointer;
-    }
-
-    & > img {
-      width: 300px;
-      height: 300px;
-      min-height: 300px;
-    }
-
-    div {
-      width: 300px;
-      margin-top: 20px;
-      text-align: left;
-
-      strong {
-        font-size: 30px;
-        font-weight: bold;
-        color: #ffa520;
-      }
-
-      p {
-        margin-top: 6px;
-        color: #ffa520;
-
-        span {
-          font-size: 20px;
-          color: #515151;
-        }
-      }
-
-      ul {
-        max-height: 30vh;
-        margin-top: 12px;
-        color: #ffa520;
-        list-style: none;
-        overflow: auto;
-
-        li {
-          margin-top: 8px;
-          font-size: 20px;
-          color: #515151;
-        }
-      }
     }
   }
 `
