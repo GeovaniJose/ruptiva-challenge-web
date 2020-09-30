@@ -6,6 +6,7 @@ import Route from './Route'
 import SignIn from '../pages/SignIn'
 import SignUp from '../pages/SignUp'
 import Dashboard from '../pages/Dashboard'
+import UpdateProfile from '../pages/UpdateProfile'
 import Modal from '../components/Modal'
 
 const Nesting: React.FC = () => {
@@ -15,6 +16,7 @@ const Nesting: React.FC = () => {
     <>
       <Route path={`${path}`} component={Dashboard} isPrivate />
       <Route path={`${path}/cocktail`} component={Modal} isPrivate />
+      <Route path={`${path}/profile`} component={UpdateProfile} isPrivate />
     </>
   )
 }

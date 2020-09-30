@@ -80,7 +80,9 @@ const Dashboard: React.FC = () => {
 
         <aside>
           <Button type='button'>Adicionar Coquetel</Button>
-          <Button type='button'>Atualizar Perfil</Button>
+          <Link to={'/dashboard/profile'}>
+            <Button type='button'>Atualizar Perfil</Button>
+          </Link>
         </aside>
 
         <button type='button' onClick={() => signOut()}>
