@@ -37,15 +37,11 @@ const UpdateProfile: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const { addToast } = useToast()
   const history = useHistory()
-  const { user, updateUser } = useAuth()
+  const { user, updateUserAvatar, updateUser } = useAuth()
 
   const handleUpdate = useCallback(
     async (data: UpdateFormData) => {
       const file = new FormData()
-
-      if (uploadedFile.file) {
-        file.append('avatar', uploadedFile.file)
-      }
 
       try {
         formRef.current?.setErrors({})
@@ -61,7 +57,12 @@ const UpdateProfile: React.FC = () => {
           abortEarly: false
         })
 
-        await updateUser(file)
+        if (uploadedFile.file) {
+          file.append('avatar', uploadedFile.file)
+          await updateUserAvatar(file)
+        }
+
+        await updateUser(data)
 
         addToast({
           type: 'success',
@@ -87,7 +88,7 @@ const UpdateProfile: React.FC = () => {
         })
       }
     },
-    [addToast, history, uploadedFile, updateUser]
+    [addToast, history, uploadedFile, updateUserAvatar, updateUser]
   )
 
   const submitFile = useCallback((file: File): void => {

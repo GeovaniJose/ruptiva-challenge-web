@@ -25,7 +25,8 @@ interface AuthContextData {
   user: UserData
   signIn(credential: SignInCredentials): Promise<void>
   signOut(): void
-  updateUser(file: FormData): Promise<void>
+  updateUserAvatar(file: FormData): Promise<void>
+  updateUser(updateData: Pick<UserData, 'name' | 'age'>): Promise<void>
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -63,7 +64,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState)
   }, [])
 
-  const updateUser = useCallback(
+  const updateUserAvatar = useCallback(
     async (file) => {
       const response = await api.patch('/users/avatar', file, {
         headers: {
@@ -77,6 +78,21 @@ export const AuthProvider: React.FC = ({ children }) => {
     [data]
   )
 
+  const updateUser = useCallback(
+    async (updateData) => {
+      const response = await api.put('/users', updateData, {
+        headers: {
+          Authorization: `Bearer ${data.token}`
+        }
+      })
+
+      localStorage.setItem('@Cockta.io:user', JSON.stringify(response.data))
+
+      setData({ token: data.token, user: response.data })
+    },
+    [data]
+  )
+
   return (
     <AuthContext.Provider
       value={{
@@ -84,6 +100,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         user: data.user,
         signIn,
         signOut,
+        updateUserAvatar,
         updateUser
       }}
     >
