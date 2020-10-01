@@ -70,7 +70,7 @@ const Dashboard: React.FC = () => {
 
       <Menu>
         <div>
-          <img src={setUrlImg(user.avatar, avatarBlankImg)} alt={user.name} />
+          <DrinkImage urlImg={setUrlImg(user.avatar, avatarBlankImg)} />
 
           <div>
             <p>Bem vindo,</p>

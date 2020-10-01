@@ -25,6 +25,7 @@ interface AuthContextData {
   user: UserData
   signIn(credential: SignInCredentials): Promise<void>
   signOut(): void
+  updateUser(file: FormData): Promise<void>
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -62,9 +63,29 @@ export const AuthProvider: React.FC = ({ children }) => {
     setData({} as AuthState)
   }, [])
 
+  const updateUser = useCallback(
+    async (file) => {
+      const response = await api.patch('/users/avatar', file, {
+        headers: {
+          Authorization: `Bearer ${data.token}`
+        }
+      })
+
+      data.user.avatar = response.data.avatar
+      localStorage.setItem('@Cockta.io:user', JSON.stringify(response.data))
+    },
+    [data]
+  )
+
   return (
     <AuthContext.Provider
-      value={{ token: data.token, user: data.user, signIn, signOut }}
+      value={{
+        token: data.token,
+        user: data.user,
+        signIn,
+        signOut,
+        updateUser
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -132,8 +132,11 @@ export const Menu = styled.section`
 
     img {
       width: 70px;
+      height: 70px;
       border-radius: 50%;
       margin-right: 16px;
+      background-size: cover;
+      background-position: top;
     }
 
     span {
