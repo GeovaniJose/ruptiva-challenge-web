@@ -13,6 +13,10 @@ interface CocktailState {
 
 interface CocktailContextData {
   cocktails: CocktailState[]
+  addCocktail(
+    data: Pick<CocktailState, 'name' | 'alcohol_level' | 'ingredients'>,
+    file: FormData
+  ): Promise<void>
   loadCocktails(): Promise<void>
   removeCocktail(id: string): void
 }
@@ -25,6 +29,35 @@ export const CocktailProvider: React.FC = ({ children }) => {
   const [cocktails, setCocktails] = useState<CocktailState[]>([])
 
   const { token } = useAuth()
+
+  const addCocktail = useCallback(
+    async (data, file) => {
+      const res = await api.post('cocktails', data, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      console.log('RESSSSS', res.data)
+
+      const newCock = res.data
+
+      const response = await api.patch(
+        `cocktails/image?cock_id=${newCock.id}`,
+        file,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      )
+
+      console.log('NNNNNNN', response.data)
+
+      setCocktails([response.data, ...cocktails])
+    },
+    [token, cocktails]
+  )
 
   const loadCocktails = useCallback(async () => {
     const response = await api.get('cocktails', {
@@ -51,7 +84,7 @@ export const CocktailProvider: React.FC = ({ children }) => {
 
   return (
     <CocktailContext.Provider
-      value={{ cocktails, loadCocktails, removeCocktail }}
+      value={{ cocktails, addCocktail, loadCocktails, removeCocktail }}
     >
       {children}
     </CocktailContext.Provider>

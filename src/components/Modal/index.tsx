@@ -3,6 +3,7 @@ import { FiX } from 'react-icons/fi'
 import { useHistory, useLocation } from 'react-router-dom'
 
 import { useCocktail } from '../../hooks/cocktail'
+import setUrlImg from '../../utils/setUrlImg'
 
 import cocktailBlankImg from '../../assets/cocktail-blank.jpg'
 
@@ -17,7 +18,9 @@ const Modal: React.FC = () => {
     <Container>
       <section>
         <FiX size={20} onClick={() => history.goBack()} />
-        <DrinkImage urlImg={cocktails[index].image || cocktailBlankImg} />
+        <DrinkImage
+          urlImg={setUrlImg(cocktails[index].image, cocktailBlankImg)}
+        />
 
         <div>
           <strong>{cocktails[index].name}</strong>

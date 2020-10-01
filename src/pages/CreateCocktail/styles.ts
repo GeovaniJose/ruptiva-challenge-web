@@ -1,5 +1,18 @@
 import styled from 'styled-components'
 
+interface DrinkImageProps {
+  urlImg: string
+}
+
+export const DrinkImage = styled.img<DrinkImageProps>`
+  width: 100%;
+  height: 100%;
+  background: url(${(props) => props.urlImg}) no-repeat center;
+  background-size: cover;
+  border-radius: 4px;
+  box-shadow: 0 0 30px -1px rgba(0, 0, 0, 0.1);
+`
+
 export const Container = styled.div`
   position: absolute;
   top: 0;
@@ -28,6 +41,20 @@ export const Container = styled.div`
     align-items: center;
     position: relative;
 
+    .dropzone {
+      width: 250px;
+      height: 250px;
+      min-height: 250px;
+      border-radius: 4px;
+
+      > p {
+        text-align: center;
+        width: 250px;
+        height: 250px;
+        background: rgba(0, 0, 0, 0.3);
+      }
+    }
+
     > svg {
       position: absolute;
       top: 2px;
@@ -37,12 +64,11 @@ export const Container = styled.div`
     }
 
     > img {
-      width: 300px;
-      height: 300px;
-      min-height: 300px;
+      width: 250px;
+      height: 250px;
+      min-height: 250px;
       margin-bottom: 20px;
-      /* border: 2px solid #ffa520; */
-      border-radius: 50%;
+      border: 2px solid #ffa520;
     }
 
     > form {
