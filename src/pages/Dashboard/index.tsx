@@ -47,7 +47,7 @@ const Dashboard: React.FC = () => {
         <ul>
           {cocktails.map((cocktail, index) => (
             <Card key={cocktail.id}>
-              <Link to={`/dashboard/cocktail?index=${index}`}>
+              <Link to={`/dashboard/cocktail/details?index=${index}`}>
                 <DrinkImage
                   urlImg={setUrlImg(cocktail.image, cocktailBlankImg)}
                 />
@@ -79,7 +79,10 @@ const Dashboard: React.FC = () => {
         </div>
 
         <aside>
-          <Button type='button'>Adicionar Coquetel</Button>
+          <Link to={'/dashboard/cocktail'}>
+            <Button type='button'>Adicionar Coquetel</Button>
+          </Link>
+
           <Link to={'/dashboard/profile'}>
             <Button type='button'>Atualizar Perfil</Button>
           </Link>

@@ -7,6 +7,7 @@ import SignIn from '../pages/SignIn'
 import SignUp from '../pages/SignUp'
 import Dashboard from '../pages/Dashboard'
 import UpdateProfile from '../pages/UpdateProfile'
+import CreateCocktail from '../pages/CreateCocktail'
 import Modal from '../components/Modal'
 
 const Nesting: React.FC = () => {
@@ -15,8 +16,14 @@ const Nesting: React.FC = () => {
   return (
     <>
       <Route path={`${path}`} component={Dashboard} isPrivate />
-      <Route path={`${path}/cocktail`} component={Modal} isPrivate />
+      <Route path={`${path}/cocktail/details`} component={Modal} isPrivate />
       <Route path={`${path}/profile`} component={UpdateProfile} isPrivate />
+      <Route
+        path={`${path}/cocktail`}
+        exact
+        component={CreateCocktail}
+        isPrivate
+      />
     </>
   )
 }
