@@ -3,6 +3,12 @@ Link do back-end da aplicação: [Cockta.io API](https://github.com/GeovaniJose/
 
 > :underage: Àlcool para menores é proibido
 
+<div align="center">
+  <a href="https://geovanijose.github.io/ruptiva-challenge-web/">
+    <img src="./src/assets/snapshot.png" alt="#ruptiva-challenge-web" />
+  </a>
+</div>
+
 ## Instalação :sparkles:
 > Você precisa ter instalado em sua máquina o [Git](https://git-scm.com) e o [Yarn](https://yarnpkg.com/)
 1. Clone este repositório
