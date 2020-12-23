@@ -4,7 +4,7 @@ Link do back-end da aplicação: [Cockta.io API](https://github.com/GeovaniJose/
 > :underage: Àlcool para menores é proibido
 
 <div align="center">
-  <a href="https://geovanijose.github.io/ruptiva-challenge-web/">
+  <a href="https://github.com/GeovaniJose/ruptiva-challenge-api">
     <img src="./src/assets/snapshot.png" alt="#ruptiva-challenge-web" />
   </a>
 </div>
